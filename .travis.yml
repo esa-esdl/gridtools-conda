@@ -1,10 +1,17 @@
-# version 2.0.0.dev20, b1
+# version 0.41
 
 language: generic
 
-env:
-  global:
-    - CONDA_PY=3.6
+python:
+  - "3.6"
+  - "3.5"
+
+# Enable 3.7 without globally enabling sudo and dist: xenial for other build jobs
+matrix:
+  include:
+  - python: 3.7
+    dist: xenial
+    sudo: true
 
 os:
   - linux
@@ -25,11 +32,5 @@ install:
   - conda install conda-build anaconda-client
 
 script:
-  #- conda build --old-build-string -c conda-forge -c defaults recipes/cate
-  #- ./upload_to_anaconda_cloud.sh cate
-  #
-  - conda build --old-build-string -c conda-forge -c defaults recipes/cate-cli
-  - ./upload_to_anaconda_cloud.sh cate-cli
-  #
-  #- conda build --old-build-string -c conda-forge -c defaults recipes/cate-util
-  #- ./upload_to_anaconda_cloud.sh cate-util
+  - conda build --old-build-string -c conda-forge -c defaults recipes/gridtools
+  - ./upload_to_anaconda_cloud.sh gridtools
