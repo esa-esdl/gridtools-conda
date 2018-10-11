@@ -14,13 +14,19 @@ source:
 requirements:
   build:
     - python {{ python }}
+    - numpy>=1.13,<2.0
+    - numba>0.35,<1.0
 
   run:
-    - python>=3.5
+    - python {{ python }}
     - numpy>=1.13,<2.0
     - numba>0.35,<1.0
 
 test:
+  # To disable JIT compilation in NUMBA (e.g. for unit-level testing). Make sure that
+  # the system env var NUMBA_DISABLE_JIT=1
+  script_env:
+    - NUMBA_DISABLE_JIT
   imports:
     - gridtools
     - gridtools.resampling

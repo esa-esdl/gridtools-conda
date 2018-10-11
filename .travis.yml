@@ -2,6 +2,8 @@
 
 language: generic
 
+env:
+  - NUMBA_DISABLE_JIT=1
 os:
   - linux
   - osx
