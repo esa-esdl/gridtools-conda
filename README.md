@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/CCI-Tools/cate-conda.svg?branch=master)](https://travis-ci.org/CCI-Tools/cate-conda)
-[![Build status](https://ci.appveyor.com/api/projects/status/oqup2pgne4h9xa4t/branch/master?svg=true)](https://ci.appveyor.com/project/ccitools/cate-conda)
+[![Build Status](https://travis-ci.org/esa-esdl/gridtools-conda.svg?branch=master)](https://travis-ci.org/esa-esdl/gridtools-conda)
+
 
 # gridtools-conda
 
