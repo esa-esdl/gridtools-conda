@@ -17,6 +17,7 @@ install:
   - bash miniconda.sh -b -p $HOME/miniconda
   - echo ". /home/travis/miniconda/etc/profile.d/conda.sh" >> ~/.bashrc
   - echo "conda activate" >> ~/.bashrc
+  - source ~/.bashrc
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
   - conda update conda
