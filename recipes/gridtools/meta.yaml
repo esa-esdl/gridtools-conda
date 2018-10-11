@@ -15,9 +15,6 @@ requirements:
   build:
     - python {{ python }}
 
-  host:
-    - python>=3.5
-
   run:
     - python>=3.5
     - numpy>=1.13,<2.0
