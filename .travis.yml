@@ -1,11 +1,9 @@
-# version 2.0.0.dev20, b1
+# version 0.4.1
 
 language: generic
 
 env:
-  global:
-    - CONDA_PY=3.6
-
+  - NUMBA_DISABLE_JIT=1
 os:
   - linux
   - osx
@@ -17,19 +15,13 @@ install:
       wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
     fi
   - bash miniconda.sh -b -p $HOME/miniconda
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - hash -r
+  - . $HOME/miniconda/etc/profile.d/conda.sh
+  - conda activate
   - conda config --set always_yes yes --set changeps1 no
   - conda update conda
   - conda info -a
   - conda install conda-build anaconda-client
 
 script:
-  #- conda build --old-build-string -c conda-forge -c defaults recipes/cate
-  #- ./upload_to_anaconda_cloud.sh cate
-  #
-  - conda build --old-build-string -c conda-forge -c defaults recipes/cate-cli
-  - ./upload_to_anaconda_cloud.sh cate-cli
-  #
-  #- conda build --old-build-string -c conda-forge -c defaults recipes/cate-util
-  #- ./upload_to_anaconda_cloud.sh cate-util
+  - conda build --old-build-string -c conda-forge -c defaults recipes/gridtools
+  - ./upload_to_anaconda_cloud.sh gridtools

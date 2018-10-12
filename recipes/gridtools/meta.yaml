@@ -1,0 +1,43 @@
+# See https://conda.io/docs/building/meta-yaml.html
+# for more information about this file.
+
+package:
+  name: gridtools
+  version: "0.4.1"
+
+build:
+  number: 0
+
+source:
+  git_url: https://github.com/esa-esdl/gridtools
+
+requirements:
+  build:
+    - python {{ python }}
+    - numpy>=1.13,<2.0
+    - numba>0.35,<1.0
+
+  run:
+    - python {{ python }}
+    - numpy>=1.13,<2.0
+    - numba>0.35,<1.0
+
+test:
+  # To disable JIT compilation in NUMBA (e.g. for unit-level testing). Make sure that
+  # the system env var NUMBA_DISABLE_JIT=1
+  script_env:
+    - NUMBA_DISABLE_JIT
+  imports:
+    - gridtools
+    - gridtools.resampling
+    - gridtools.gapfilling
+  requires:
+    # Put any additional test requirements here.
+    - pytest
+    - pytest-cov
+
+about:
+  home: https://github.com/esa-esdl/gridtools
+  license: MIT
+  license_file: LICENSE
+
