@@ -16,6 +16,8 @@ install:
 
 build_script:
   - cmd: call %PYTHON_LOC%\Scripts\activate.bat root
-  - cmd: conda install conda-build anaconda-client
+  - cmd: conda install conda-build conda-verify anaconda-client
   - cmd: conda build --old-build-string -c conda-forge -c anaconda recipes\gridtools recipes\gridtools\conda_build_config.yaml
-  #- cmd: anaconda -v -t %ANACONDA_TOKEN% upload "%PYTHON_LOC%\conda-bld\win-64\gridtools*.tar.bz2" -u bc-dev --force
+  - cmd: if %APPVEYOR_REPO_BRANCH% EQ "master" anaconda -v -t %ANACONDA_TOKEN% upload C:\Miniconda37-x64\conda-bld\win-64\gridtools-0.4.1-py36_0.tar.bz2 -u bc-dev --force
+  - cmd: if %APPVEYOR_REPO_BRANCH% EQ "master" anaconda -v -t %ANACONDA_TOKEN% upload C:\Miniconda37-x64\conda-bld\win-64\gridtools-0.4.1-py35_0.tar.bz2 -u bc-dev --force
+  - cmd: if %APPVEYOR_REPO_BRANCH% EQ "master" anaconda -v -t %ANACONDA_TOKEN% upload C:\Miniconda37-x64\conda-bld\win-64\gridtools-0.4.1-py37_0.tar.bz2 -u bc-dev --force
