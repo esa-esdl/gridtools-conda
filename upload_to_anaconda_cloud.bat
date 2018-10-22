@@ -7,7 +7,7 @@ SET BUILD=conda build --old-build-string -c conda-forge -c anaconda recipes\grid
 REM Run bild and loop through results
 
 FOR /F  "tokens=*" %%b in ('%BUILD%') DO (
-    echo anaconda -v -t %1 upload %%b --force
+    anaconda -v -t %1 upload %%b --force
 )
 
 
