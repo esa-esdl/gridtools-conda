@@ -10,8 +10,11 @@ echo
 if [ "$TRAVIS_BRANCH" = "master" ]; then
     if [ "$TRAVIS_EVENT_TYPE" = "api" -o "$TRAVIS_EVENT_TYPE" = "push" ]; then
         CONDA_PACKAGE=$(conda build --old-build-string -c conda-forge -c defaults recipes/$1 --output);
-        echo "conda package $CONDA_PACKAGE";
-        anaconda -v -t $ANACONDA_TOKEN upload "$CONDA_PACKAGE" -u bc-dev --force;
+        for PKG in $CONDA_PACKAGE
+        do
+            echo "conda package $CONDA_PACKAGE";
+            anaconda -v -t $ANACONDA_TOKEN upload "$PKG" -u bc-dev --force;
+        done
     else
         echo "NOT uploading to Anaconda Cloud, because this is the wrong event type";
         echo "event $TRAVIS_EVENT_TYPE"
