@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/esa-esdl/gridtools-conda.svg?branch=master)](https://travis-ci.org/esa-esdl/gridtools-conda)
-
+[![Build status](https://ci.appveyor.com/api/projects/status/ok4cwwmry9ccdk82?svg=true)](https://ci.appveyor.com/project/dzelge/gridtools-conda)
 
 # gridtools-conda
 

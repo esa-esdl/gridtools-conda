@@ -7,10 +7,6 @@ environment:
   matrix:
     - PYTHON_LOC: "C:\\Miniconda37-x64"
       PYTHON_VERSION: 3.7
-    - PYTHON_LOC: "C:\\Miniconda36-x64"
-      PYTHON_VERSION: 3.6
-    - PYTHON_LOC: "C:\\Miniconda35-x64"
-      PYTHON_VERSION: 3.5
 
 install:
   - cmd: call %PYTHON_LOC%\Scripts\activate.bat
@@ -19,12 +15,11 @@ install:
   - cmd: conda info -a
 
 build_script:
-  - cmd: conda env create --file environment-%PYTHON_VERSION%.yml
-  - cmd: call %PYTHON_LOC%\Scripts\activate.bat gridtools
-  - cmd: python setup.py install
-  - cmd: conda list
-  - cmd: py.test -v test
+  - cmd: echo 'Building gridtools using branch %APPVEYOR_REPO_BRANCH%'
+    # Activate root environment and install build and upload tools
   - cmd: call %PYTHON_LOC%\Scripts\activate.bat root
-  - cmd: conda install conda-build anaconda-client
-  - cmd: conda build --old-build-string -c conda-forge -c anaconda recipes\gridtools recipes\gridtools\conda_build_config.yaml
-  - cmd: anaconda -v -t %ANACONDA_TOKEN% upload "%PYTHON_LOC%\conda-bld\win-64\gridtools*.tar.bz2" -u bc-dev --force
+  - cmd: conda install conda-build conda-verify anaconda-client
+    # Build the image and its variants
+  - cmd: conda build --old-build-string -c conda-forge -c anaconda recipes\gridtools
+    # Upload the images to the anaconda cloud only if in master branch
+  - cmd: if %APPVEYOR_REPO_BRANCH% == master upload_to_anaconda_cloud %ANACONDA_TOKEN%
